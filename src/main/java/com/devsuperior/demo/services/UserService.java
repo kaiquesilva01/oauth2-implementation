@@ -24,10 +24,10 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException("Not Found");
         }
         User user = new User();
-        user.setEmail(username);
+        user.setEmail(result.get(0).getUsername());
         user.setPassword(result.get(0).getPassword());
         for(UserDetailsProjection projection : result) {
-            user.addRole(new Role(projection.roleId(), projection.getAuthority()));
+            user.addRole(new Role(projection.getRoleId(), projection.getAuthority()));
         }
         return user;
     }
